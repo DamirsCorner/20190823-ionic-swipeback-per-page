@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { NavController } from '@ionic/angular';
+import { RouterOutletService } from '../router-outlet.service';
 
 @Component({
   selector: 'app-home',
@@ -6,7 +8,24 @@ import { Component } from '@angular/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+  constructor(
+    private routerOutletService: RouterOutletService,
+    private navCtrl: NavController
+  ) {}
 
-  constructor() {}
+  ionViewDidEnter() {
+    this.routerOutletService.swipebackEnabled = false;
+  }
 
+  ionViewDidLeave() {
+    this.routerOutletService.swipebackEnabled = true;
+  }
+
+  goToNext() {
+    return this.navCtrl.navigateForward('/next');
+  }
+
+  goToSub() {
+    return this.navCtrl.navigateForward('/sub');
+  }
 }
